@@ -1,0 +1,38 @@
+Date,Description,Montant,Type
+2024-07-15,Vente logiciel entreprise A,12500.00,recette
+2024-07-20,Achat matériel informatique,-3200.00,dépense
+2024-07-25,Prestation consulting,8500.00,recette
+2024-08-05,Loyer bureau,-4500.00,dépense
+2024-08-10,Formation développement,15000.00,recette
+2024-08-15,Frais électricité,-850.00,dépense
+2024-08-20,Vente application mobile,9200.00,recette
+2024-09-02,Contrat maintenance,7800.00,recette
+2024-09-15,Développement site web,11500.00,recette
+2024-09-20,Achat serveur,-5800.00,dépense
+2024-10-01,Vente module e-commerce,13200.00,recette
+2024-10-15,Assurance bureau,-1800.00,dépense
+2024-10-20,Prestation design,4200.00,recette
+2024-11-01,Vente système gestion,18500.00,recette
+2024-11-10,Formation client,3500.00,recette
+2024-11-20,Développement API,9800.00,recette
+2024-12-02,Bonus fin d'année,22000.00,recette
+2024-12-15,Frais hébergement,-1200.00,dépense
+2024-12-20,Consulting stratégique,14500.00,recette
+2025-01-08,Nouveau contrat annuel,25000.00,recette
+2025-01-15,Formation nouvelle technologie,8000.00,recette
+2025-01-25,Développement application,12000.00,recette
+2025-02-01,Prestation février,9500.00,recette
+2025-02-10,Consulting entreprise B,7200.00,recette
+2025-02-20,Vente module CRM,16500.00,recette
+2025-03-01,Contrat maintenance Mars,8800.00,recette
+2025-03-10,Formation avancée,11200.00,recette
+2025-03-20,Développement mobile,13800.00,recette
+2025-04-02,Nouveau projet avril,19500.00,recette
+2025-04-10,Consulting performance,6800.00,recette
+2025-04-20,Vente solution sur mesure,21000.00,recette
+2025-05-01,Contrat mai,14200.00,recette
+2025-05-10,Formation équipe mai,4500.00,recette
+2025-05-20,Prestation urgente,8900.00,recette
+2025-06-01,Contrat été,16800.00,recette
+2025-06-10,Développement été,10500.00,recette
+2025-06-20,Consulting spécialisé,12200.00,recette
