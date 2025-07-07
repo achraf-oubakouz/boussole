@@ -3,12 +3,10 @@
 {% block page_title %}Écritures comptables{% endblock %}
 
 {% block page_actions %}
-    <a href="{% url 'compta:upload' %}" class="btn btn-primary">
-        <i class="fas fa-upload"></i> Importer un fichier
-    </a>
 {% endblock %}
 
 {% block content %}
+<div class="entries-page">
     <!-- Filters -->
     <div class="card mb-4">
         <div class="card-body">
@@ -32,7 +30,7 @@
                 <div class="col-md-3">
                     <label class="form-label">&nbsp;</label>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-outline-primary">
+                        <button type="submit" class="btn btn-primary">
                             <i class="fas fa-filter"></i> Filtrer
                         </button>
                     </div>
@@ -44,13 +42,18 @@
     <!-- Entries table -->
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title mb-0">
-                <i class="fas fa-list"></i>
-                Liste des écritures
-                {% if entries %}
-                    <span class="badge bg-secondary">{{ entries|length }} résultat{{ entries|length|pluralize }}</span>
-                {% endif %}
-            </h5>
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-list"></i>
+                    Liste des écritures
+                    {% if entries %}
+                        <span class="badge bg-secondary">{{ entries|length }} résultat{{ entries|length|pluralize }}</span>
+                    {% endif %}
+                </h5>
+                <a href="{% url 'compta:upload' %}" class="btn btn-primary">
+                    <i class="fas fa-upload"></i> Importer un fichier
+                </a>
+            </div>
         </div>
         <div class="card-body">
             {% if entries %}
@@ -152,4 +155,5 @@
             {% endif %}
         </div>
     </div>
+</div>
 {% endblock %}

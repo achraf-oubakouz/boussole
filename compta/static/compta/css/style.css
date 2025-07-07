@@ -1,0 +1,633 @@
+/* Clean Dashboard Styling - Inspired by Modern Accounting Software */
+
+:root {
+    --primary-color: #1f2937;
+    --secondary-color: #3b82f6;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #06b6d4;
+    --light-gray: #f9fafb;
+    --medium-gray: #e5e7eb;
+    --dark-gray: #6b7280;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --sidebar-bg: #ffffff;
+    --main-bg: #f9fafb;
+    --card-bg: #ffffff;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --transition: all 0.2s ease;
+}
+
+/* Global Styles */
+html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--main-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%;
+    max-width: 100vw;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    height: 100vh;
+    padding: 1.5rem 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .position-sticky {
+    display: flex !important;
+    flex-direction: column !important;
+    height: calc(100vh - 3rem) !important;
+    position: static !important;
+}
+
+.sidebar .nav.flex-column {
+    flex: 1 !important;
+    margin-bottom: 0 !important;
+}
+
+.sidebar .mt-auto {
+    margin-top: auto !important;
+    flex-shrink: 0 !important;
+}
+
+.sidebar h4 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding: 0 1.5rem;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+}
+
+.logo:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-icon {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-right: 0.75rem;
+    text-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.logo-primary {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.1rem;
+    letter-spacing: -0.025em;
+}
+
+.logo-secondary {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sidebar .nav {
+    padding: 0;
+}
+
+.sidebar .nav-item {
+    margin: 0;
+}
+
+.sidebar .nav-link {
+    color: var(--text-secondary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.sidebar .nav-link:hover {
+    background: var(--light-gray);
+    color: var(--text-primary);
+}
+
+.sidebar .nav-link.active {
+    background: #3b82f610;
+    color: var(--secondary-color);
+    border-right: 3px solid var(--secondary-color);
+    font-weight: 600;
+}
+
+.sidebar .nav-link i {
+    margin-right: 0.75rem;
+    width: 16px;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+/* Main Content Area */
+.main-content {
+    background: var(--main-bg);
+    min-height: 100vh;
+    padding: 1.5rem;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    color: var(--text-primary);
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Cards Enhancement */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card-header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Statistics Cards - Clean Design */
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.stat-card-body {
+    padding: 1.5rem;
+}
+
+.stat-card-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.stat-card-icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.7;
+}
+
+/* Progress Bars in Stats */
+.stat-progress {
+    height: 4px;
+    background: var(--light-gray);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.stat-progress-bar {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.stat-progress-bar.bg-primary {
+    background: var(--secondary-color);
+}
+
+.stat-progress-bar.bg-success {
+    background: var(--success-color);
+}
+
+.stat-progress-bar.bg-danger {
+    background: var(--danger-color);
+}
+
+.stat-progress-bar.bg-warning {
+    background: var(--warning-color);
+}
+
+/* Button Improvements */
+.btn {
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border: 1px solid transparent;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--medium-gray);
+    border-color: var(--medium-gray);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--dark-gray);
+    border-color: var(--dark-gray);
+    color: white;
+}
+
+.btn-outline-danger {
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+    background: transparent;
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    color: white;
+}
+
+/* Form Improvements */
+.form-control {
+    border-radius: var(--border-radius);
+    border: 2px solid #e9ecef;
+    padding: 0.75rem 1rem;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Table Improvements */
+.table {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    color: #000000 !important;
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+    padding: 1rem;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody tr {
+    transition: var(--transition);
+}
+
+.table tbody tr:hover {
+    background: rgba(52, 152, 219, 0.05);
+    transform: scale(1.01);
+}
+
+.table tbody td {
+    padding: 1rem;
+    border-color: #f1f3f4;
+    vertical-align: middle;
+}
+
+/* Badge Improvements */
+.badge {
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+}
+
+/* Alert Improvements */
+.alert {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: var(--shadow-light);
+    border-left: 4px solid;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(46, 204, 113, 0.1));
+    border-left-color: var(--success-color);
+    color: #155724;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(192, 57, 43, 0.1));
+    border-left-color: var(--danger-color);
+    color: #721c24;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.1));
+    border-left-color: var(--info-color);
+    color: #0c5460;
+}
+
+/* Chart Container */
+.chart-container {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    padding: 1.5rem;
+    position: relative;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition);
+    background: rgba(255,255,255,0.5);
+}
+
+.upload-area:hover {
+    border-color: var(--secondary-color);
+    background: rgba(52, 152, 219, 0.05);
+}
+
+/* Recent Files List */
+.recent-files .list-group-item {
+    border: none;
+    border-radius: var(--border-radius);
+    margin-bottom: 0.5rem;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+}
+
+.recent-files .list-group-item:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #6c757d;
+}
+
+.empty-state i {
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+/* Loading Animation */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .stat-card-value {
+        font-size: 1.5rem;
+    }
+    
+    .page-header {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Scrollbar Styling - Neutral colors */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Bootstrap Grid Fixes */
+.row {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+}
+
+.col, [class*="col-"] {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+/* Additional overlapping prevention */
+.main-content * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure content stays within bounds */
+.card, .table-responsive, .alert {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Ensure tables don't cause overflow */
+.table-responsive {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    max-width: 100%;
+    word-break: break-word;
+}
+
+/* Django Admin Integration - Push admin content right when sidebar is present */
+/* Try multiple selectors to catch admin content */
+body[class*="admin"] #main,
+body[class*="admin"] #content,
+body[class*="admin"] .breadcrumbs,
+body[class*="admin"] #content-main,
+body[class*="admin"] .main,
+body[class*="admin"] main,
+[class*="admin"] #main,
+[class*="admin"] #content,
+[class*="admin"] .breadcrumbs,
+[class*="admin"] #content-main {
+    margin-left: 250px !important;
+    width: calc(100% - 250px) !important;
+    box-sizing: border-box !important;
+}
+
+/* Make sidebar work in admin - try multiple selectors */
+body[class*="admin"] .sidebar,
+[class*="admin"] .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 250px !important;
+    z-index: 999;
+    height: 100vh !important;
+}
+
+/* Additional fallback - target any page with sidebar present */
+.sidebar ~ * {
+    margin-left: 250px !important;
+}
+
+/* Force admin content to the right if sidebar exists */
+body:has(.sidebar) #main,
+body:has(.sidebar) #content,
+body:has(.sidebar) main {
+    margin-left: 250px !important;
+    width: calc(100% - 250px) !important;
+}
+
+/* Print Styles */
+@media print {
+    .sidebar, .btn, .page-header .btn-toolbar {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #dee2e6 !important;
+    }
+}

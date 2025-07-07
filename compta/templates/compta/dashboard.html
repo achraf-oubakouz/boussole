@@ -11,66 +11,49 @@
 {% block content %}
     <!-- Statistics Cards -->
     <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card text-white bg-primary">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title">Total Entrées</h6>
-                            <h3 class="mb-0">{{ total_entries }}</h3>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-file-alt card-icon"></i>
-                        </div>
+        <div class="col-lg-6">
+            <div class="stat-card">
+                <div class="stat-card-body">
+                    <div class="stat-card-title">TOTAL RECETTES</div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="stat-card-value" style="color: var(--success-color);">{{ total_income|floatformat:2 }} DH</div>
+                        <small class="text-muted">Total des entrées de type recette</small>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-3">
-            <div class="card text-white bg-success">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title">Recettes</h6>
-                            <h3 class="mb-0">{{ total_income|floatformat:2 }} DH</h3>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-arrow-up card-icon"></i>
-                        </div>
+        <div class="col-lg-6">
+            <div class="stat-card">
+                <div class="stat-card-body">
+                    <div class="stat-card-title">TOTAL DÉPENSES</div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="stat-card-value" style="color: var(--danger-color);">{{ total_expenses|floatformat:2 }} DH</div>
+                        <small class="text-muted">Total des sorties et frais</small>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-3">
-            <div class="card text-white bg-danger">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title">Dépenses</h6>
-                            <h3 class="mb-0">{{ total_expenses|floatformat:2 }} DH</h3>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-arrow-down card-icon"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-3">
-            <div class="card text-white {% if balance >= 0 %}bg-success{% else %}bg-danger{% endif %}">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title">Solde</h6>
-                            <h3 class="mb-0">{{ balance|floatformat:2 }} DH</h3>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-balance-scale card-icon"></i>
-                        </div>
-                    </div>
+    </div>
+    
+    <!-- Result Card -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="stat-card" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 2px solid #dee2e6;">
+                <div class="stat-card-body text-center">
+                    <div class="stat-card-title" style="font-size: 1.1rem; margin-bottom: 15px;">RÉSULTAT</div>
+                    {% with result_value=balance %}
+                    {% if result_value > 0 %}
+                        <div class="stat-card-value" style="color: var(--success-color); font-size: 2.5rem; font-weight: bold;">+{{ result_value|floatformat:2 }} DH</div>
+                        <div class="mt-2" style="font-size: 1.1rem; color: var(--success-color); font-weight: 600;">Bénéfice</div>
+                    {% elif result_value < 0 %}
+                        <div class="stat-card-value" style="color: var(--danger-color); font-size: 2.5rem; font-weight: bold;">{{ result_value|floatformat:2 }} DH</div>
+                        <div class="mt-2" style="font-size: 1.1rem; color: var(--danger-color); font-weight: 600;">Perte</div>
+                    {% else %}
+                        <div class="stat-card-value" style="color: var(--secondary-color); font-size: 2.5rem; font-weight: bold;">{{ result_value|floatformat:2 }} DH</div>
+                        <div class="mt-2" style="font-size: 1.1rem; color: var(--secondary-color); font-weight: 600;">Équilibre</div>
+                    {% endif %}
+                    {% endwith %}
                 </div>
             </div>
         </div>
@@ -104,20 +87,21 @@
                 </div>
                 <div class="card-body">
                     {% if recent_uploads %}
-                        <div class="list-group list-group-flush">
+                        <div class="recent-files">
                             {% for upload in recent_uploads %}
-                                <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
-                                        <strong>{{ upload.name }}</strong><br>
+                                        <div class="fw-bold text-dark">{{ upload.name }}</div>
                                         <small class="text-muted">
-                                            {{ upload.uploaded_at|date:"d/m/Y H:i" }}
-                                            <span class="badge bg-secondary">{{ upload.entries.count }} entrées</span>
+                                            <i class="fas fa-calendar-alt me-1"></i>{{ upload.uploaded_at|date:"d/m/Y H:i" }}
+                                            <span class="badge bg-info ms-2">{{ upload.entries.count }} entrées</span>
                                         </small>
                                     </div>
                                     <form method="post" action="{% url 'compta:delete_upload' upload.id %}" class="d-inline">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" 
-                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce fichier ?')">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill" 
+                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce fichier ?')"
+                                                title="Supprimer ce fichier">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -125,13 +109,12 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="text-muted text-center">
-                            <i class="fas fa-inbox fa-2x mb-2"></i><br>
-                            Aucun fichier traité.
-                        </p>
-                        <div class="text-center">
-                            <a href="{% url 'compta:upload' %}" class="btn btn-primary btn-sm">
-                                Importer le premier fichier
+                        <div class="empty-state">
+                            <i class="fas fa-inbox fa-3x"></i>
+                            <h6>Aucun fichier traité</h6>
+                            <p class="mb-3">Commencez par importer votre premier fichier</p>
+                            <a href="{% url 'compta:upload' %}" class="btn btn-primary">
+                                <i class="fas fa-upload me-2"></i>Importer un fichier
                             </a>
                         </div>
                     {% endif %}

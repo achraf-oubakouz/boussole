@@ -8,10 +8,13 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 import pandas as pd
 import json
-from .models import UploadedFile, FinancialEntry, Category
-from .forms import FileUploadForm
+from .models import UploadedFile, FinancialEntry
+from .forms import FileUploadForm, CodeLoginForm
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import user_passes_test
 
 
+@login_required
 def dashboard(request):
     """Main dashboard view showing financial data overview"""
     # Get recent uploads
@@ -102,6 +105,7 @@ def dashboard(request):
     return render(request, 'compta/dashboard.html', context)
 
 
+@login_required
 def upload_file(request):
     """Handle file upload and processing"""
     if request.method == 'POST':
@@ -127,11 +131,11 @@ def upload_file(request):
             # Process the file
             try:
                 process_uploaded_file(uploaded_file)
-                messages.success(request, f'Fichier "{uploaded_file.name}" uploadé et traité avec succès!')
+                messages.success(request, f'Fichier "{uploaded_file.name}" importé et traité avec succès!')
                 return redirect('compta:dashboard')
             except Exception as e:
                 messages.error(request, f'Erreur lors du traitement du fichier: {str(e)}')
-                uploaded_file.delete()  # Clean up failed upload
+                uploaded_file.delete()  # Clean up failed import
         else:
             messages.error(request, 'Erreur dans le formulaire. Veuillez vérifier les données.')
     else:
@@ -214,12 +218,18 @@ def process_uploaded_file(uploaded_file):
         uploaded_file.processed_at = timezone.now()
         uploaded_file.save()
         
+        # Clear admin cache to update counters
+        from django.core.cache import cache
+        cache.delete('admin_financialentry_count')
+        cache.delete('admin_stats_context')
+        
         print(f"Fichier traité: {entries_created} entrées créées")
         
     except Exception as e:
         raise Exception(f"Erreur lors du traitement du fichier: {str(e)}")
 
 
+@login_required
 def entries_list(request):
     """Display list of all financial entries"""
     entries = FinancialEntry.objects.select_related('uploaded_file').order_by('-date')
@@ -247,6 +257,7 @@ def entries_list(request):
     return render(request, 'compta/entries_list.html', context)
 
 
+@login_required
 def delete_upload(request, upload_id):
     """Delete an uploaded file and all its entries"""
     if request.method == 'POST':
@@ -256,3 +267,32 @@ def delete_upload(request, upload_id):
         messages.success(request, f'Fichier "{file_name}" supprimé avec succès!')
     
     return redirect('compta:dashboard')
+
+
+def code_login(request):
+    """Custom login view using authentication codes"""
+    # Redirect to dashboard if already authenticated
+    if request.user.is_authenticated:
+        return redirect('compta:dashboard')
+    
+    if request.method == 'POST':
+        form = CodeLoginForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            
+            # Redirect to next URL or dashboard
+            next_url = request.GET.get('next', 'compta:dashboard')
+            return redirect(next_url)
+    else:
+        form = CodeLoginForm(request)
+    
+    return render(request, 'compta/login.html', {'form': form})
+
+
+@login_required
+def user_logout(request):
+    """Logout view"""
+    logout(request)
+    messages.success(request, 'Vous avez été déconnecté avec succès.')
+    return redirect('compta:login')

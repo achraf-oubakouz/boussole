@@ -1,0 +1,802 @@
+/* Boussole Admin Theme - Matching Application Design */
+
+:root {
+    --primary-color: #1f2937;
+    --secondary-color: #3b82f6;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #06b6d4;
+    --light-gray: #f9fafb;
+    --medium-gray: #e5e7eb;
+    --dark-gray: #6b7280;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --sidebar-bg: #ffffff;
+    --main-bg: #f9fafb;
+    --card-bg: #ffffff;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --border-radius: 8px;
+    --transition: all 0.2s ease;
+}
+
+/* Override Django admin colors */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    background: var(--main-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Header styling */
+#header {
+    background: var(--sidebar-bg) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+#site-name {
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+    color: var(--text-primary) !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+}
+
+#site-name a {
+    color: var(--secondary-color) !important;
+    text-decoration: none !important;
+}
+
+#site-name a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background: var(--light-gray) !important;
+    border: none !important;
+    padding: 1rem 20px !important;
+    font-size: 0.875rem !important;
+}
+
+.breadcrumbs a {
+    color: var(--secondary-color) !important;
+    text-decoration: none !important;
+}
+
+.breadcrumbs a:hover {
+    color: var(--primary-color) !important;
+    text-decoration: underline !important;
+}
+
+/* Content area */
+#content {
+    background: var(--main-bg) !important;
+    padding: 2rem 20px !important;
+}
+
+#content-main {
+    background: transparent !important;
+}
+
+/* Module styling */
+.module {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: var(--shadow-sm) !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.module h2 {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    font-size: 1.125rem !important;
+    padding: 1rem 1.5rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    margin: 0 !important;
+}
+
+.module caption {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: 1rem 1.5rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Table styling */
+table {
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+    background: var(--card-bg) !important;
+}
+
+thead th {
+    background: var(--light-gray) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    padding: 1rem !important;
+}
+
+tbody tr {
+    transition: var(--transition) !important;
+}
+
+tbody tr:hover {
+    background: rgba(59, 130, 246, 0.05) !important;
+}
+
+tbody td {
+    padding: 1rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    vertical-align: middle !important;
+}
+
+/* Form styling */
+.form-row {
+    margin-bottom: 1.5rem !important;
+}
+
+.form-row label {
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 0.5rem !important;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="number"], 
+input[type="date"], 
+input[type="datetime-local"], 
+textarea, 
+select {
+    border: 2px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.875rem !important;
+    transition: var(--transition) !important;
+    background: var(--card-bg) !important;
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="password"]:focus, 
+input[type="number"]:focus, 
+input[type="date"]:focus, 
+input[type="datetime-local"]:focus, 
+textarea:focus, 
+select:focus {
+    border-color: var(--secondary-color) !important;
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+    outline: none !important;
+}
+
+/* Button styling */
+.button, 
+input[type="submit"], 
+input[type="button"], 
+.submit-row input {
+    background: var(--secondary-color) !important;
+    border: 1px solid var(--secondary-color) !important;
+    color: white !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: var(--border-radius) !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    transition: var(--transition) !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.button:hover, 
+input[type="submit"]:hover, 
+input[type="button"]:hover, 
+.submit-row input:hover {
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+    color: white !important;
+}
+
+.button.default, 
+.default {
+    background: var(--success-color) !important;
+    border-color: var(--success-color) !important;
+}
+
+.button.default:hover {
+    background: #059669 !important;
+    border-color: #059669 !important;
+}
+
+/* Danger/Delete buttons */
+.deletelink, 
+.deletelink-box a {
+    background: var(--danger-color) !important;
+    border-color: var(--danger-color) !important;
+    color: white !important;
+}
+
+.deletelink:hover, 
+.deletelink-box a:hover {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+}
+
+/* Object tools */
+.object-tools {
+    margin-bottom: 1.5rem !important;
+}
+
+.object-tools li {
+    margin-left: 0.5rem !important;
+}
+
+.object-tools a {
+    background: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: var(--border-radius) !important;
+    font-size: 0.875rem !important;
+    text-decoration: none !important;
+}
+
+.object-tools a:hover {
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+}
+
+/* Pagination */
+.paginator {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 1rem !important;
+    margin-top: 1.5rem !important;
+}
+
+.paginator a {
+    color: var(--secondary-color) !important;
+    text-decoration: none !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: var(--border-radius) !important;
+    margin: 0 0.25rem !important;
+    transition: var(--transition) !important;
+}
+
+.paginator a:hover {
+    background: var(--light-gray) !important;
+    color: var(--primary-color) !important;
+}
+
+.paginator .this-page {
+    background: var(--secondary-color) !important;
+    color: white !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: var(--border-radius) !important;
+    margin: 0 0.25rem !important;
+}
+
+/* Messages */
+.messagelist {
+    margin: 0 0 2rem 0 !important;
+}
+
+.messagelist li {
+    border-radius: var(--border-radius) !important;
+    padding: 1rem 1.5rem !important;
+    margin-bottom: 1rem !important;
+    border: none !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.messagelist .info {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(14, 165, 233, 0.1)) !important;
+    border-left: 4px solid var(--info-color) !important;
+    color: #0c5460 !important;
+}
+
+.messagelist .success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.1)) !important;
+    border-left: 4px solid var(--success-color) !important;
+    color: #155724 !important;
+}
+
+.messagelist .warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1)) !important;
+    border-left: 4px solid var(--warning-color) !important;
+    color: #856404 !important;
+}
+
+.messagelist .error {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(248, 113, 113, 0.1)) !important;
+    border-left: 4px solid var(--danger-color) !important;
+    color: #721c24 !important;
+}
+
+/* Change list filters */
+#changelist-filter {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+#changelist-filter h2 {
+    background: var(--light-gray) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: 1rem !important;
+    margin: 0 !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+#changelist-filter h3 {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1rem 0.5rem 1rem !important;
+    margin: 0 !important;
+    font-size: 0.875rem !important;
+}
+
+#changelist-filter ul {
+    padding: 0 !important;
+    margin: 0 0 1rem 0 !important;
+}
+
+#changelist-filter li {
+    padding: 0.5rem 1rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+#changelist-filter li:last-child {
+    border-bottom: none !important;
+}
+
+#changelist-filter a {
+    color: var(--secondary-color) !important;
+    text-decoration: none !important;
+    font-size: 0.875rem !important;
+}
+
+#changelist-filter a:hover {
+    color: var(--primary-color) !important;
+    text-decoration: underline !important;
+}
+
+#changelist-filter .selected {
+    background: var(--light-gray) !important;
+    font-weight: 600 !important;
+}
+
+/* Dashboard styling */
+#content h1 {
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
+    font-size: 1.875rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.dashboard .module {
+    margin-bottom: 1.5rem !important;
+}
+
+.dashboard .module table {
+    margin: 0 !important;
+}
+
+/* Login form styling */
+.login {
+    background: var(--main-bg) !important;
+}
+
+.login #container {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: var(--shadow-md) !important;
+    padding: 2rem !important;
+    margin-top: 5rem !important;
+}
+
+.login form {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.login .form-row {
+    margin-bottom: 1.5rem !important;
+}
+
+.login .form-row label {
+    display: block !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Sidebar styling */
+#nav-sidebar {
+    background: var(--sidebar-bg) !important;
+    border-right: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+#nav-sidebar .module h2 {
+    background: var(--light-gray) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: 1rem !important;
+    margin: 0 !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+#nav-sidebar .module {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    margin-bottom: 1rem !important;
+}
+
+#nav-sidebar a {
+    color: var(--text-secondary) !important;
+    text-decoration: none !important;
+    padding: 0.5rem 1rem !important;
+    display: block !important;
+    font-size: 0.875rem !important;
+    transition: var(--transition) !important;
+}
+
+#nav-sidebar a:hover {
+    background: var(--light-gray) !important;
+    color: var(--text-primary) !important;
+}
+
+#nav-sidebar .selected a {
+    background: rgba(59, 130, 246, 0.1) !important;
+    color: var(--secondary-color) !important;
+    font-weight: 600 !important;
+    border-left: 3px solid var(--secondary-color) !important;
+}
+
+/* Enhanced table styling for change lists */
+.results table {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+    box-shadow: var(--shadow-sm) !important;
+    margin-top: 1rem !important;
+}
+
+.results thead th {
+    background: var(--light-gray) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: 1rem 0.75rem !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    font-size: 0.875rem !important;
+}
+
+.results tbody tr {
+    transition: var(--transition) !important;
+}
+
+.results tbody tr:nth-child(even) {
+    background: rgba(249, 250, 251, 0.5) !important;
+}
+
+.results tbody tr:hover {
+    background: rgba(59, 130, 246, 0.05) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.results tbody td {
+    padding: 0.875rem 0.75rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    vertical-align: middle !important;
+    font-size: 0.875rem !important;
+}
+
+/* Action checkboxes styling */
+.action-checkbox {
+    margin-right: 0.5rem !important;
+    transform: scale(1.1) !important;
+}
+
+.action-counter {
+    background: var(--secondary-color) !important;
+    color: white !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: var(--border-radius) !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+}
+
+.actions {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.actions select {
+    border: 2px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 0.5rem 0.75rem !important;
+    margin-right: 0.5rem !important;
+    background: var(--card-bg) !important;
+}
+
+.actions .button {
+    margin-left: 0.5rem !important;
+}
+
+/* Enhanced form styling */
+.aligned label {
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+}
+
+.wide label {
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+}
+
+.help {
+    color: var(--text-secondary) !important;
+    font-size: 0.8rem !important;
+    margin-top: 0.25rem !important;
+    font-style: italic !important;
+}
+
+/* Fieldset styling */
+fieldset {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+fieldset h2 {
+    background: var(--light-gray) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1rem !important;
+    margin: -1.5rem -1.5rem 1rem -1.5rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+    font-size: 1rem !important;
+}
+
+.collapse fieldset {
+    background: var(--light-gray) !important;
+}
+
+.collapse fieldset h2 {
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+}
+
+.collapse fieldset h2:hover {
+    background: var(--medium-gray) !important;
+}
+
+/* Enhanced error styling */
+.errorlist {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(248, 113, 113, 0.1)) !important;
+    border: 1px solid var(--danger-color) !important;
+    border-left: 4px solid var(--danger-color) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 1rem !important;
+    margin: 0.5rem 0 !important;
+    list-style: none !important;
+    color: #721c24 !important;
+}
+
+.errorlist li {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: 500 !important;
+}
+
+.errors {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(248, 113, 113, 0.1)) !important;
+    border-left: 4px solid var(--danger-color) !important;
+    color: #721c24 !important;
+    padding: 1rem !important;
+    border-radius: var(--border-radius) !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Submit row styling */
+.submit-row {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 1.5rem !important;
+    margin-top: 2rem !important;
+    box-shadow: var(--shadow-sm) !important;
+    text-align: right !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 1rem !important;
+}
+
+.submit-row input[type="submit"],
+.submit-row button,
+.submit-row .button {
+    background: var(--secondary-color) !important;
+    border: 1px solid var(--secondary-color) !important;
+    color: white !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: var(--border-radius) !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    transition: var(--transition) !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    margin: 0 !important;
+}
+
+.submit-row input[type="submit"]:hover,
+.submit-row button:hover,
+.submit-row .button:hover {
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3) !important;
+}
+
+.submit-row .default {
+    background: var(--success-color) !important;
+    border-color: var(--success-color) !important;
+}
+
+.submit-row .default:hover {
+    background: #059669 !important;
+    border-color: #059669 !important;
+}
+
+.submit-row .deletelink {
+    background: var(--danger-color) !important;
+    border-color: var(--danger-color) !important;
+}
+
+.submit-row .deletelink:hover {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+}
+
+/* Calendar widget styling */
+.calendar, .calendarbox {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.calendar caption, .calendarbox h2 {
+    background: var(--secondary-color) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 0.75rem !important;
+    margin: 0 !important;
+}
+
+.calendar th {
+    background: var(--light-gray) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: 0.5rem !important;
+}
+
+.calendar td {
+    padding: 0.5rem !important;
+    text-align: center !important;
+    border: 1px solid var(--border-color) !important;
+    transition: var(--transition) !important;
+}
+
+.calendar td:hover {
+    background: var(--light-gray) !important;
+    cursor: pointer !important;
+}
+
+.calendar td.selected {
+    background: var(--secondary-color) !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+/* Hide navigation sidebar completely */
+#nav-sidebar {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Adjust main content when sidebar is hidden */
+.main {
+    margin-left: 0 !important;
+}
+
+.main > .content {
+    margin-left: 0 !important;
+}
+
+/* Ensure content takes full width without sidebar */
+#content {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+/* Hide theme toggle elements */
+.theme-toggle,
+.theme-toggle button,
+button.theme-toggle,
+[class*="theme-toggle"],
+[id*="theme-toggle"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Force light theme styles */
+html[data-theme] {
+    color-scheme: light !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #content {
+        padding: 1rem 10px !important;
+    }
+    
+    .module {
+        margin-bottom: 1rem !important;
+    }
+    
+    .module h2, .module caption {
+        padding: 0.75rem 1rem !important;
+        font-size: 1rem !important;
+    }
+    
+    tbody td, thead th {
+        padding: 0.75rem 0.5rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .submit-row {
+        text-align: center !important;
+    }
+    
+    .submit-row input {
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    fieldset {
+        padding: 1rem !important;
+    }
+    
+    fieldset h2 {
+        margin: -1rem -1rem 1rem -1rem !important;
+        font-size: 0.9rem !important;
+    }
+}

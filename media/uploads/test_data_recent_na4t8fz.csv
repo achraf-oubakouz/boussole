@@ -1,0 +1,38 @@
+Date,Description,Montant,Type
+7/15/2024,Vente logiciel entreprise A,12500,recette
+7/7/2025,Achat matériel informatique,-3200,dépense
+7/7/2025,Prestation consulting,8500,recette
+8/7/2025,Loyer bureau,-4500,dépense
+15/7/2025,Formation développement,15000,recette
+8/15/2024,Frais électricité,-850,dépense
+8/20/2024,Vente application mobile,9200,recette
+9/2/2024,Contrat maintenance,7800,recette
+9/15/2024,Développement site web,11500,recette
+9/20/2024,Achat serveur,-5800,dépense
+10/1/2024,Vente module e-commerce,13200,recette
+10/15/2024,Assurance bureau,-1800,dépense
+10/20/2024,Prestation design,4200,recette
+11/1/2024,Vente système gestion,18500,recette
+11/10/2024,Formation client,3500,recette
+11/20/2024,Développement API,9800,recette
+12/2/2024,Bonus fin d'année,22000,recette
+12/15/2024,Frais hébergement,-1200,dépense
+12/20/2024,Consulting stratégique,14500,recette
+1/8/2025,Nouveau contrat annuel,25000,recette
+1/15/2025,Formation nouvelle technologie,8000,recette
+1/25/2025,Développement application,12000,recette
+2/1/2025,Prestation février,9500,recette
+2/10/2025,Consulting entreprise B,7200,recette
+2/20/2025,Vente module CRM,16500,recette
+3/1/2025,Contrat maintenance Mars,8800,recette
+3/10/2025,Formation avancée,11200,recette
+3/20/2025,Développement mobile,13800,recette
+4/2/2025,Nouveau projet avril,19500,recette
+4/10/2025,Consulting performance,6800,recette
+4/20/2025,Vente solution sur mesure,21000,recette
+5/1/2025,Contrat mai,14200,recette
+5/10/2025,Formation équipe mai,4500,recette
+5/20/2025,Prestation urgente,8900,recette
+6/1/2025,Contrat été,16800,recette
+6/10/2025,Développement été,10500,recette
+6/20/2025,Consulting spécialisé,12200,recette

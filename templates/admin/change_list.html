@@ -1,0 +1,225 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Enhanced search bar */
+    .actions {
+        background: var(--card-bg) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+    
+    .actions label {
+        font-weight: 600 !important;
+        color: var(--text-primary) !important;
+        margin-right: 0.5rem !important;
+    }
+    
+    .actions select {
+        border: 2px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        padding: 0.5rem 0.75rem !important;
+        margin-right: 0.5rem !important;
+        background: var(--card-bg) !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .actions .button {
+        margin-left: 0.5rem !important;
+    }
+    
+    /* Enhanced filters */
+    #changelist-filter {
+        background: var(--card-bg) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        box-shadow: var(--shadow-sm) !important;
+        margin-left: 1rem !important;
+    }
+    
+    #changelist-filter h2 {
+        background: var(--secondary-color) !important;
+        color: white !important;
+        font-weight: 600 !important;
+        padding: 1rem !important;
+        margin: 0 !important;
+        border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+        font-size: 1rem !important;
+    }
+    
+    /* Enhanced search */
+    #toolbar {
+        background: var(--card-bg) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+    
+    #toolbar form {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    #toolbar input[type="text"] {
+        flex: 1 !important;
+        border: 2px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    #toolbar input[type="text"]:focus {
+        border-color: var(--secondary-color) !important;
+        box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+        outline: none !important;
+    }
+    
+    #toolbar input[type="submit"] {
+        background: var(--secondary-color) !important;
+        border: 1px solid var(--secondary-color) !important;
+        color: white !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: var(--border-radius) !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
+        cursor: pointer !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        min-width: auto !important;
+        height: auto !important;
+        line-height: 1.2 !important;
+    }
+    
+    #toolbar input[type="submit"]:hover {
+        background: #2563eb !important;
+        border-color: #2563eb !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3) !important;
+    }
+    
+    /* Results table improvements */
+    .results {
+        background: var(--card-bg) !important;
+        border-radius: var(--border-radius) !important;
+        overflow: hidden !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+    
+    .results table {
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    
+    .results thead th {
+        background: var(--light-gray) !important;
+        color: var(--text-primary) !important;
+        font-weight: 600 !important;
+        padding: 1rem 0.75rem !important;
+        border-bottom: 2px solid var(--border-color) !important;
+        font-size: 0.875rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+    }
+    
+    .results thead th a {
+        color: var(--text-primary) !important;
+        text-decoration: none !important;
+    }
+    
+    .results thead th a:hover {
+        color: var(--secondary-color) !important;
+    }
+    
+    .results tbody tr {
+        transition: var(--transition) !important;
+    }
+    
+    .results tbody tr:nth-child(even) {
+        background: rgba(249, 250, 251, 0.5) !important;
+    }
+    
+    .results tbody tr:hover {
+        background: rgba(59, 130, 246, 0.05) !important;
+        transform: translateY(-1px) !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+    
+    .results tbody td {
+        padding: 0.875rem 0.75rem !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        vertical-align: middle !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .results tbody td a {
+        color: var(--secondary-color) !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+    }
+    
+    .results tbody td a:hover {
+        color: var(--primary-color) !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Pagination improvements */
+    .paginator {
+        background: var(--card-bg) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        padding: 1rem !important;
+        margin-top: 1.5rem !important;
+        box-shadow: var(--shadow-sm) !important;
+        text-align: center !important;
+    }
+    
+    .paginator .results {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin-bottom: 1rem !important;
+        font-weight: 600 !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .paginator a {
+        color: var(--secondary-color) !important;
+        text-decoration: none !important;
+        padding: 0.5rem 0.75rem !important;
+        border-radius: var(--border-radius) !important;
+        margin: 0 0.25rem !important;
+        transition: var(--transition) !important;
+        font-weight: 500 !important;
+    }
+    
+    .paginator a:hover {
+        background: var(--light-gray) !important;
+        color: var(--primary-color) !important;
+    }
+    
+    .paginator .this-page {
+        background: var(--secondary-color) !important;
+        color: white !important;
+        padding: 0.5rem 0.75rem !important;
+        border-radius: var(--border-radius) !important;
+        margin: 0 0.25rem !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Empty state */
+    .results .null {
+        text-align: center !important;
+        padding: 3rem !important;
+        color: var(--text-secondary) !important;
+        font-style: italic !important;
+    }
+</style>
+{% endblock %}

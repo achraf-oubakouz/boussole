@@ -1,0 +1,105 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+/* Force submit button styling */
+.submit-row {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    padding: 1.5rem !important;
+    margin-top: 2rem !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    text-align: right !important;
+}
+
+.submit-row input[type="submit"],
+.submit-row button,
+.submit-row .button,
+.submit-row a.button {
+    background: #3b82f6 !important;
+    border: 1px solid #3b82f6 !important;
+    color: white !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    transition: all 0.2s ease !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.submit-row input[type="submit"]:hover,
+.submit-row button:hover,
+.submit-row .button:hover,
+.submit-row a.button:hover {
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3) !important;
+}
+
+.submit-row .default {
+    background: #10b981 !important;
+    border-color: #10b981 !important;
+}
+
+.submit-row .default:hover {
+    background: #059669 !important;
+    border-color: #059669 !important;
+}
+
+.submit-row .deletelink {
+    background: #ef4444 !important;
+    border-color: #ef4444 !important;
+}
+
+.submit-row .deletelink:hover {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+}
+
+/* Fix specific button positioning issues */
+.submit-row input[name="_save"],
+.submit-row input[name="_continue"],
+.submit-row input[name="_addanother"] {
+    background: #10b981 !important;
+    border-color: #10b981 !important;
+}
+
+.submit-row input[name="_save"]:hover,
+.submit-row input[name="_continue"]:hover,
+.submit-row input[name="_addanother"]:hover {
+    background: #059669 !important;
+    border-color: #059669 !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .submit-row {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .submit-row input[type="submit"],
+    .submit-row button,
+    .submit-row .button {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+}
+</style>
+{% endblock %}

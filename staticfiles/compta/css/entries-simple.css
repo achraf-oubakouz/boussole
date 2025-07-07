@@ -1,0 +1,145 @@
+/* Simple Entries Page Styling - Basic Bootstrap Look */
+
+/* Override modern card styling for entries page */
+.entries-page .card {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    box-shadow: none;
+    margin-bottom: 1rem;
+}
+
+.entries-page .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+}
+
+.entries-page .card-body {
+    padding: 1.25rem;
+}
+
+/* Simple table styling */
+.entries-page .table {
+    background: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: none;
+}
+
+.entries-page .table thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    padding: 0.75rem;
+}
+
+.entries-page .table tbody tr {
+    transition: none;
+}
+
+.entries-page .table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: none;
+}
+
+.entries-page .table tbody td {
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+/* Simple form controls */
+.entries-page .form-control {
+    border-radius: 0.375rem;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.entries-page .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.entries-page .form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+/* Simple buttons */
+.entries-page .btn {
+    border-radius: 0.375rem;
+    font-weight: 400;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border: 1px solid transparent;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.entries-page .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+}
+
+.entries-page .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+    color: #ffffff;
+}
+
+.entries-page .btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+    background-color: transparent;
+}
+
+.entries-page .btn-outline-primary:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+}
+
+/* Simple badges */
+.entries-page .badge {
+    border-radius: 0.25rem;
+    padding: 0.25em 0.4em;
+    font-weight: 500;
+    font-size: 0.75em;
+}
+
+/* Simple alert */
+.entries-page .alert {
+    border-radius: 0.375rem;
+    border: 1px solid transparent;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.entries-page .alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+/* Remove custom scrollbar styling for entries page */
+.entries-page ::-webkit-scrollbar {
+    width: auto;
+}
+
+.entries-page ::-webkit-scrollbar-track {
+    background: auto;
+    border-radius: auto;
+}
+
+.entries-page ::-webkit-scrollbar-thumb {
+    background: auto;
+    border-radius: auto;
+}
+
+.entries-page ::-webkit-scrollbar-thumb:hover {
+    background: auto;
+}

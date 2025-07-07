@@ -1,0 +1,394 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Aggressive horizontal scroll prevention */
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+    
+    #container {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+    
+    #content {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    #content-main {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+    
+    .breadcrumbs {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        word-wrap: break-word !important;
+    }
+    
+    /* Fix Django admin specific elements */
+    .results {
+        overflow-x: auto !important;
+        max-width: 100% !important;
+    }
+    
+    .results table {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+    
+    .changelist {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    .changelist-results {
+        overflow-x: auto !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix sidebar */
+    #nav-sidebar {
+        max-width: 280px !important;
+        overflow-x: hidden !important;
+    }
+    .admin-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+    }
+    
+    .stat-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+    
+    .stat-card h3 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.05em;
+    }
+    
+    .stat-card .value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .description {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+    }
+    
+    .stat-card.primary {
+        border-left: 4px solid var(--secondary-color);
+    }
+    
+    .stat-card.success {
+        border-left: 4px solid var(--success-color);
+    }
+    
+    .stat-card.warning {
+        border-left: 4px solid var(--warning-color);
+    }
+    
+    .stat-card.info {
+        border-left: 4px solid var(--info-color);
+    }
+    
+    .quick-actions {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .quick-actions h2 {
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        font-size: 1.125rem;
+    }
+    
+    .quick-actions-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        max-width: 100%;
+    }
+    
+    .quick-action {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 1rem;
+        background: #f1f3f4;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        color: var(--text-primary);
+        transition: var(--transition);
+        min-height: 120px;
+        justify-content: center;
+    }
+    
+    .quick-action:hover {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--secondary-color);
+        text-decoration: none;
+    }
+    
+    .quick-action i {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--secondary-color);
+    }
+    
+    .quick-action span {
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-align: center;
+    }
+    
+    /* Hide ALL default admin content */
+    #content-main .module {
+        display: none !important;
+    }
+    
+    #content-main .app-auth,
+    #content-main .app-compta {
+        display: none !important;
+    }
+    
+    /* Show only our custom content */
+    .custom-admin-content {
+        display: block !important;
+    }
+    
+    .custom-admin-content .module {
+        display: block !important;
+        margin-top: 1rem;
+    }
+    
+    /* Style our custom app list modules */
+    .custom-admin-content .module table {
+        background: var(--card-bg) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        overflow: hidden !important;
+        box-shadow: var(--shadow-sm) !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    
+    .custom-admin-content .module caption {
+        background: var(--secondary-color) !important;
+        color: white !important;
+        font-weight: 600 !important;
+        padding: 1rem !important;
+        margin: 0 !important;
+        text-align: left !important;
+        font-size: 1rem !important;
+    }
+    
+    .custom-admin-content .module th,
+    .custom-admin-content .module td {
+        padding: 0.875rem !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+    
+    .custom-admin-content .module th {
+        background: var(--light-gray) !important;
+        font-weight: 600 !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .custom-admin-content .module tr:hover {
+        background: rgba(59, 130, 246, 0.05) !important;
+    }
+    
+    /* Style the sidebar to match our design */
+    #nav-sidebar {
+        background: var(--sidebar-bg) !important;
+        border-right: 1px solid var(--border-color) !important;
+    }
+    
+    #nav-sidebar .module h2 {
+        background: var(--secondary-color) !important;
+        color: white !important;
+        font-weight: 600 !important;
+        padding: 1rem !important;
+        margin: 0 !important;
+        font-size: 0.9rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+    }
+    
+    #nav-sidebar .module {
+        background: var(--card-bg) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        margin-bottom: 1rem !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+    
+    #nav-sidebar a {
+        color: var(--text-secondary) !important;
+        text-decoration: none !important;
+        padding: 0.75rem 1rem !important;
+        display: block !important;
+        font-size: 0.875rem !important;
+        transition: var(--transition) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+    
+    #nav-sidebar a:last-child {
+        border-bottom: none !important;
+    }
+    
+    #nav-sidebar a:hover {
+        background: var(--light-gray) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    #nav-sidebar .selected a {
+        background: rgba(59, 130, 246, 0.1) !important;
+        color: var(--secondary-color) !important;
+        font-weight: 600 !important;
+        border-left: 3px solid var(--secondary-color) !important;
+        margin-left: -1px !important;
+    }
+    
+    /* Hide the filter sidebar toggle */
+    #changelist-filter-toggle {
+        display: none !important;
+    }
+    
+    @media (max-width: 768px) {
+        .admin-stats {
+            grid-template-columns: 1fr;
+        }
+        
+        .quick-actions-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .quick-action {
+            min-height: 100px;
+            padding: 1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="custom-admin-content" style="width: 100%; max-width: 100vw; overflow-x: hidden;">
+<div class="admin-stats" style="width: 100%; max-width: 100%;">
+    <div class="stat-card primary">
+        <h3>Entrées comptables</h3>
+        <div class="value">{{ total_entries|default:"0" }}</div>
+        <div class="description">Nombre total d'écritures</div>
+    </div>
+    
+    <div class="stat-card success">
+        <h3>Fichiers traités</h3>
+        <div class="value">{{ processed_files|default:"0" }}</div>
+        <div class="description">Fichiers importés avec succès</div>
+    </div>
+    
+    <div class="stat-card info">
+        <h3>Ce mois</h3>
+        <div class="value">{{ monthly_entries|default:"0" }}</div>
+        <div class="description">Nouvelles écritures</div>
+    </div>
+</div>
+
+<div class="quick-actions">
+    <h2><i class="fas fa-bolt" style="margin-right: 0.5rem; color: var(--secondary-color);"></i>Actions rapides</h2>
+    <div class="quick-actions-grid">
+        <a href="{% url 'compta:dashboard' %}" class="quick-action">
+            <i class="fas fa-chart-line"></i>
+            <span>Tableau de bord</span>
+        </a>
+        
+        <a href="{% url 'admin:compta_financialentry_add' %}" class="quick-action">
+            <i class="fas fa-plus"></i>
+            <span>Nouvelle écriture</span>
+        </a>
+        
+        <a href="{% url 'admin:compta_financialentry_changelist' %}" class="quick-action">
+            <i class="fas fa-list"></i>
+            <span>Voir les écritures</span>
+        </a>
+        
+        <a href="{% url 'compta:upload' %}" class="quick-action">
+            <i class="fas fa-upload"></i>
+            <span>Importer fichier</span>
+        </a>
+        
+        <a href="{% url 'admin:compta_uploadedfile_changelist' %}" class="quick-action">
+            <i class="fas fa-file-alt"></i>
+            <span>Fichiers importés</span>
+        </a>
+        
+        <a href="{% url 'admin:auth_user_changelist' %}" class="quick-action">
+            <i class="fas fa-users"></i>
+            <span>Gestion utilisateurs</span>
+        </a>
+    </div>
+</div>
+
+{% if recent_actions %}
+<div class="module" id="recent-actions-module">
+    <h2>{% trans 'Recent actions' %}</h2>
+    <h3>{% trans 'My actions' %}</h3>
+    {% load log %}
+    {% get_admin_log 10 as admin_log for_user user %}
+    {% if not admin_log %}
+        <p>{% trans 'None available' %}</p>
+    {% else %}
+        <ul class="actionlist">
+        {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endif %}
+</div> <!-- End custom-admin-content -->
+{% endblock %}

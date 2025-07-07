@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class UploadedFile(models.Model):
@@ -20,8 +22,8 @@ class UploadedFile(models.Model):
     processed_at = models.DateTimeField(null=True, blank=True, verbose_name="Date de traitement")
     
     class Meta:
-        verbose_name = "Fichier uploadé"
-        verbose_name_plural = "Fichiers uploadés"
+        verbose_name = "Fichier importé"
+        verbose_name_plural = "Fichiers importés"
         ordering = ['-uploaded_at']
     
     def __str__(self):
@@ -41,7 +43,6 @@ class FinancialEntry(models.Model):
     description = models.CharField(max_length=500, verbose_name="Description")
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Montant")
     entry_type = models.CharField(max_length=10, choices=ENTRY_TYPES, verbose_name="Type")
-    category = models.CharField(max_length=100, blank=True, null=True, verbose_name="Catégorie")
     created_at = models.DateTimeField(default=timezone.now, verbose_name="Créé le")
     
     class Meta:
@@ -53,18 +54,34 @@ class FinancialEntry(models.Model):
         return f"{self.date} - {self.description} ({self.amount} DH)"
 
 
-class Category(models.Model):
-    """Model to manage expense/income categories"""
-    
-    name = models.CharField(max_length=100, unique=True, verbose_name="Nom")
-    description = models.TextField(blank=True, null=True, verbose_name="Description")
-    color = models.CharField(max_length=7, default='#007bff', verbose_name="Couleur", help_text="Code couleur hexadécimal pour les graphiques")
+class UserProfile(models.Model):
+    """Extended user profile with login code"""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    code = models.CharField(max_length=20, unique=True, verbose_name="Code de connexion")
     created_at = models.DateTimeField(default=timezone.now, verbose_name="Créé le")
+    last_login_code = models.DateTimeField(null=True, blank=True, verbose_name="Dernière connexion")
     
     class Meta:
-        verbose_name = "Catégorie"
-        verbose_name_plural = "Catégories"
-        ordering = ['name']
+        verbose_name = "Profil utilisateur"
+        verbose_name_plural = "Profils utilisateur"
     
     def __str__(self):
-        return self.name
+        return f"{self.user.username} - {self.code}"
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """Create profile when user is created"""
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    """Save profile when user is saved"""
+    if hasattr(instance, 'profile'):
+        instance.profile.save()
+    else:
+        UserProfile.objects.create(user=instance)
+
+
