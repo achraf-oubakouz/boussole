@@ -41,7 +41,7 @@ body {
     font-size: 1.5rem !important;
     color: var(--text-primary) !important;
     margin: 0 !important;
-    padding: 1rem !important;
+    padding: 0.5rem 1rem !important;
 }
 
 #site-name a {
@@ -57,7 +57,7 @@ body {
 .breadcrumbs {
     background: var(--light-gray) !important;
     border: none !important;
-    padding: 1rem 20px !important;
+    padding: 10px 20px !important;
     font-size: 0.875rem !important;
 }
 
@@ -74,7 +74,8 @@ body {
 /* Content area */
 #content {
     background: var(--main-bg) !important;
-    padding: 2rem 20px !important;
+    padding: 20px !important;
+    
 }
 
 #content-main {
@@ -726,25 +727,11 @@ fieldset h2 {
     font-weight: 600 !important;
 }
 
-/* Hide navigation sidebar completely */
+/* Navigation sidebar styling */
 #nav-sidebar {
-    display: none !important;
-    visibility: hidden !important;
-}
-
-/* Adjust main content when sidebar is hidden */
-.main {
-    margin-left: 0 !important;
-}
-
-.main > .content {
-    margin-left: 0 !important;
-}
-
-/* Ensure content takes full width without sidebar */
-#content {
-    margin-left: 0 !important;
-    width: 100% !important;
+    background: var(--sidebar-bg) !important;
+    border-right: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm) !important;
 }
 
 /* Hide theme toggle elements */

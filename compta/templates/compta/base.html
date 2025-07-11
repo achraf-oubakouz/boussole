@@ -17,82 +17,139 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Custom CSS -->
+    <!-- Custom CSS - Load after Bootstrap -->
     {% load static %}
     <link href="{% static 'compta/css/style.css' %}" rel="stylesheet">
+    
+    <!-- Inline CSS to force sidebar width - Only for non-admin pages -->
+    <style>
+        /* Only apply sidebar layout to non-admin pages */
+        body:not(.admin) .sidebar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 250px !important;
+            min-width: 250px !important;
+            max-width: 250px !important;
+            height: 100vh !important;
+            z-index: 1000 !important;
+            background: #ffffff !important;
+            border-right: 1px solid #e5e7eb !important;
+            display: flex !important;
+            flex-direction: column !important;
+            padding: 1.5rem 0 !important;
+        }
+        
+        body:not(.admin) .sidebar .sidebar-content {
+            display: flex !important;
+            flex-direction: column !important;
+            height: 100% !important;
+        }
+        
+        body:not(.admin) .sidebar .nav.flex-column {
+            flex: 1 !important;
+            margin-bottom: 0 !important;
+        }
+        
+        body:not(.admin) .sidebar .sidebar-footer {
+            margin-top: auto !important;
+            flex-shrink: 0 !important;
+            padding: 1rem 1.5rem !important;
+            border-top: 1px solid #e5e7eb !important;
+        }
+        
+        body:not(.admin) .sidebar .user-profile {
+            display: flex !important;
+            align-items: center !important;
+            margin-bottom: 0.75rem !important;
+        }
+        
+        body:not([class*="admin"]) .main-content,
+        body:not(.admin) .main-content {
+            margin-left: 250px !important;
+            width: calc(100% - 250px) !important;
+        }
+        
+        /* Force admin pages to have no margin */
+        body.admin .main-content,
+        body[class*="admin"] .main-content,
+        .admin .main-content {
+            margin-left: 0 !important;
+            width: 100% !important;
+        }
+    </style>
     
     {% block extra_css %}{% endblock %}
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse" id="sidebarMenu">
-                <div class="position-sticky pt-1 d-flex flex-column" style="height: calc(100vh - 60px);">
-                    <a href="{% url 'compta:dashboard' %}" class="logo">
-                        <i class="fas fa-compass logo-icon"></i>
-                        <div class="logo-text">
-                            <div class="logo-primary">Boussole</div>
-                            <div class="logo-secondary">Conseil</div>
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebarMenu">
+            <div class="sidebar-content">
+                <a href="{% url 'compta:dashboard' %}" class="logo">
+                    <i class="fas fa-compass logo-icon"></i>
+                    <div class="logo-text">
+                        <div class="logo-primary">Boussole</div>
+                        <div class="logo-secondary">Conseil</div>
+                    </div>
+                </a>
+                
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" 
+                           href="{% url 'compta:dashboard' %}">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Tableau de bord
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'upload' %}active{% endif %}" 
+                           href="{% url 'compta:upload' %}">
+                            <i class="fas fa-upload"></i>
+                            Importer fichier
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'entries_list' %}active{% endif %}" 
+                           href="{% url 'compta:entries_list' %}">
+                            <i class="fas fa-list"></i>
+                            Écritures comptables
+                        </a>
+                    </li>
+                    {% if request.user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/admin' in request.path %}active{% endif %}" href="{% url 'admin:index' %}">
+                            <i class="fas fa-cogs"></i>
+                            Administration
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                
+                <!-- User info and logout -->
+                <div class="sidebar-footer">
+                    <div class="user-info">
+                        <div class="user-profile">
+                            <i class="fas fa-user-circle me-2" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                            <span class="text-dark fw-medium" style="font-size: 0.9rem;">{{ request.user.get_full_name|default:request.user.username }}</span>
                         </div>
-                    </a>
-                    
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" 
-                               href="{% url 'compta:dashboard' %}">
-                                <i class="fas fa-tachometer-alt"></i>
-                                Tableau de bord
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'upload' %}active{% endif %}" 
-                               href="{% url 'compta:upload' %}">
-                                <i class="fas fa-upload"></i>
-                                Importer fichier
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.resolver_match.url_name == 'entries_list' %}active{% endif %}" 
-                               href="{% url 'compta:entries_list' %}">
-                                <i class="fas fa-list"></i>
-                                Écritures comptables
-                            </a>
-                        </li>
-                        {% if request.user.is_staff %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if '/admin' in request.path %}active{% endif %}" href="{% url 'admin:index' %}">
-                                <i class="fas fa-cogs"></i>
-                                Administration
-                            </a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                    
-                    <!-- User info and logout -->
-                    <div class="mt-auto pt-3 border-top" style="border-color: var(--border-color) !important;">
-                        <div class="px-3 py-2">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-user-circle me-2" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <span class="text-dark fw-medium" style="font-size: 0.9rem;">{{ request.user.get_full_name|default:request.user.username }}</span>
-                            </div>
-                            <a href="{% url 'compta:logout' %}" class="btn btn-outline-danger btn-sm w-100">
-                                <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
-                            </a>
-                        </div>
+                        <a href="{% url 'compta:logout' %}" class="btn btn-outline-danger btn-sm w-100">
+                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                        </a>
                     </div>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
-            <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+        <!-- Main content -->
+        <main class="main-content">
                 <!-- Mobile menu button -->
                 <button class="btn btn-outline-secondary d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i> Menu
                 </button>
                 
                 <!-- Top navigation -->
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-2 mb-3 border-bottom">
                     <h1 class="h2">{% block page_title %}Tableau de bord{% endblock %}</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         {% block page_actions %}{% endblock %}
@@ -109,10 +166,9 @@
                     {% endfor %}
                 {% endif %}
 
-                <!-- Page content -->
-                {% block content %}{% endblock %}
-            </main>
-        </div>
+            <!-- Page content -->
+            {% block content %}{% endblock %}
+        </main>
     </div>
 
     <!-- Bootstrap JS -->

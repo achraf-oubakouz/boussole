@@ -144,13 +144,38 @@ body {
 }
 
 #container {
-    margin-left: 250px !important;
+    margin-left: 0 !important;
     padding: 0 !important;
-    width: calc(100vw - 250px) !important;
-    max-width: calc(100vw - 250px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: 100vh !important;
     position: relative !important;
     box-sizing: border-box !important;
+}
+
+/* NUCLEAR OPTION - Remove ALL margin-left from everything */
+*,
+*::before,
+*::after {
+    margin-left: 0 !important;
+}
+
+.colM,
+.colMS,
+.colSM,
+.colS,
+#content,
+#content.colM,
+div#content,
+div#content.colM,
+div.colM {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+/* Target inline styles */
+[style*="margin-left"] {
+    margin-left: 0 !important;
 }
 
 .main {
@@ -245,12 +270,12 @@ body {
 
 /* Main Content Area to match main template */
 .main-content {
-    margin-left: 250px !important;
+    margin-left: 0 !important;
     background: var(--main-bg) !important;
     min-height: 100vh !important;
     padding: 0 !important;
-    width: calc(100vw - 250px) !important;
-    max-width: calc(100vw - 250px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
     flex: none !important;
@@ -259,9 +284,9 @@ body {
 /* Override Bootstrap column classes specifically for admin */
 .main-content.col-md-9,
 .main-content.col-lg-10 {
-    margin-left: 250px !important;
-    width: calc(100vw - 250px) !important;
-    max-width: calc(100vw - 250px) !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
     flex: none !important;
     padding-left: 0 !important;
     padding-right: 0 !important;

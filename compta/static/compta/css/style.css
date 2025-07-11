@@ -47,20 +47,27 @@ html, body {
 
 /* Sidebar */
 .sidebar {
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border-color);
-    box-shadow: var(--shadow-sm);
-    height: 100vh;
-    padding: 1.5rem 0;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar .position-sticky {
+    background: var(--sidebar-bg) !important;
+    border-right: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm) !important;
+    height: 100vh !important;
+    padding: 1.5rem 0 !important;
+    overflow-y: auto !important;
     display: flex !important;
     flex-direction: column !important;
-    height: calc(100vh - 3rem) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    z-index: 1000 !important;
+}
+
+.sidebar .sidebar-content {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100vh !important;
     position: static !important;
 }
 
@@ -69,9 +76,21 @@ html, body {
     margin-bottom: 0 !important;
 }
 
-.sidebar .mt-auto {
+.sidebar .sidebar-footer {
     margin-top: auto !important;
     flex-shrink: 0 !important;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.sidebar .user-info {
+    padding: 0.5rem 0;
+}
+
+.sidebar .user-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
 }
 
 .sidebar h4 {
@@ -176,6 +195,8 @@ html, body {
     padding: 1.5rem;
     overflow-x: hidden;
     box-sizing: border-box;
+    margin-left: 250px;
+    width: calc(100% - 250px);
 }
 
 /* Page Header */
@@ -502,7 +523,21 @@ html, body {
 
 /* Responsive Improvements */
 @media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        transition: left 0.3s ease;
+        z-index: 1050;
+    }
+    
+    .sidebar.show {
+        left: 0;
+    }
+    
     .main-content {
+        margin-left: 0;
+        width: 100%;
         padding: 1rem;
     }
     
@@ -550,6 +585,46 @@ html, body {
     overflow-wrap: break-word;
 }
 
+/* Override Bootstrap collapse for sidebar */
+.sidebar.collapse {
+    display: flex !important;
+    width: 250px !important;
+    visibility: visible !important;
+}
+
+.sidebar.collapse.show {
+    display: flex !important;
+    width: 250px !important;
+}
+
+/* Prevent Bootstrap from affecting sidebar */
+.sidebar {
+    flex: none !important;
+    flex-basis: 250px !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+/* Ultra-specific sidebar rules */
+nav.sidebar,
+nav.sidebar.d-md-block,
+#sidebarMenu,
+#sidebarMenu.sidebar,
+.sidebar#sidebarMenu {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    flex: none !important;
+    flex-basis: 250px !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    z-index: 1000 !important;
+}
+
 
 /* Additional overlapping prevention */
 .main-content * {
@@ -574,45 +649,54 @@ html, body {
     word-break: break-word;
 }
 
-/* Django Admin Integration - Push admin content right when sidebar is present */
-/* Try multiple selectors to catch admin content */
-body[class*="admin"] #main,
-body[class*="admin"] #content,
-body[class*="admin"] .breadcrumbs,
-body[class*="admin"] #content-main,
-body[class*="admin"] .main,
-body[class*="admin"] main,
-[class*="admin"] #main,
-[class*="admin"] #content,
-[class*="admin"] .breadcrumbs,
-[class*="admin"] #content-main {
-    margin-left: 250px !important;
-    width: calc(100% - 250px) !important;
+/* Django Admin Integration - Disable sidebar for admin pages */
+body.admin .sidebar {
+    display: none !important;
+}
+
+body.admin .main-content,
+body.admin #main,
+body.admin #content,
+body.admin .breadcrumbs,
+body.admin #content-main {
+    margin-left: 0 !important;
+    width: 100% !important;
     box-sizing: border-box !important;
 }
 
-/* Make sidebar work in admin - try multiple selectors */
-body[class*="admin"] .sidebar,
-[class*="admin"] .sidebar {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 250px !important;
-    z-index: 999;
-    height: 100vh !important;
+/* NUCLEAR ADMIN FIX - Override Django admin navigation sidebar */
+body.admin #nav-sidebar {
+    display: none !important;
 }
 
-/* Additional fallback - target any page with sidebar present */
-.sidebar ~ * {
-    margin-left: 250px !important;
+body.admin .toggle-nav-sidebar {
+    display: none !important;
 }
 
-/* Force admin content to the right if sidebar exists */
-body:has(.sidebar) #main,
-body:has(.sidebar) #content,
-body:has(.sidebar) main {
-    margin-left: 250px !important;
-    width: calc(100% - 250px) !important;
+body.admin .main > #nav-sidebar + .content,
+body.admin .main.shifted > #nav-sidebar + .content {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+}
+
+body.admin .colM,
+body.admin .colMS,
+body.admin .colSM,
+body.admin .colS,
+body.admin #content.colM,
+body.admin div#content.colM,
+body.admin div.colM {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+body.admin * {
+    margin-left: 0 !important;
+}
+
+body.admin [style*="margin-left"] {
+    margin-left: 0 !important;
 }
 
 /* Print Styles */
